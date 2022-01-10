@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 using WagonRepairDepot.Models;
 
-namespace TestDBF
+namespace WagonRepairDepot.Contexts
 {
-    public partial class trainContext : DbContext
+    public partial class TrainContext : DbContext
     {
-        public trainContext()
+        public TrainContext()
         {
         }
 
-        public trainContext(DbContextOptions<trainContext> options)
+        public TrainContext(DbContextOptions<TrainContext> options)
             : base(options)
         {
         }
