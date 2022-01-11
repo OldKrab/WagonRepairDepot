@@ -13,7 +13,7 @@ namespace WagonRepairDepot.Contexts
         {
             return db.Wagons.FromSqlRaw($"select * from wagon_inspect_by({inspector.InspectorId});").ToList();
         }
-
+        
         public static List<Wagon> ActualWagons(this TrainContext db)
         {
             return db.Wagons.FromSqlRaw($"select * from actual_wagon;").ToList();
@@ -161,10 +161,6 @@ namespace WagonRepairDepot.Contexts
             return db.Works.FromSqlRaw($"select * from get_works_perfomed_by_worker({worker.WorkerId});").ToList();
         }
 
-        public static List<Wagon> WagonInspectBy(this TrainContext db, Inspector inspector)
-        {
-            return db.Wagons.FromSqlRaw($"select * from wagon_inspect_by({inspector.InspectorId});").ToList();
-        }
 
         public static List<Wagon> WagonReceptBy(this TrainContext db, Receptionist receptionist)
         {

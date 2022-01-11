@@ -28,6 +28,7 @@ namespace WagonRepairDepot.Models
         [System.ComponentModel.Browsable(false)]
         public int WorkOrderId { get; set; }
 
+        [System.ComponentModel.Browsable(false)]
         public virtual Brigade Brigade { get; set; } = null!;
 
         [System.ComponentModel.Browsable(false)]
