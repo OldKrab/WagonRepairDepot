@@ -12,6 +12,8 @@ namespace WagonRepairDepot
 {
     public partial class AuthenticationForm : Form
     {
+        private bool _success { set; get; }
+
         public AuthenticationForm()
         {
             InitializeComponent();
@@ -26,13 +28,19 @@ namespace WagonRepairDepot
         {
             try
             {
-                //new RedactorForm(new Contexts.TrainContext(textBoxLogin.Text, textBoxPassword.Text).Brigades.First(), new Models.BrigadeFormModel()).Show();
-                this.Hide();
+                var trainContext =  new Contexts.TrainContext(textBoxLogin.Text, textBoxPassword.Text).Brigades.First();
+                _success = true;
+                Close();
             }
             catch(Exception ex)
             {
                 MessageBox.Show("Не получилось авторизоваться, проверьте вводимые данные. \n\n" + ex.Message, "Беда");
             }
+        }
+
+        public bool isSuccess()
+        {
+            return _success;
         }
     }
 }

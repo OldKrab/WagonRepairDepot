@@ -19,7 +19,15 @@ namespace WagonRepairDepot
             Application.SetCompatibleTextRenderingDefault(false);
 
             using TrainContext db = new();
-            Application.Run(new EditBrigadeForm(db.Brigades.First(b => b.BrigadeId==18)));
+            /*
+            AuthenticationForm af;
+            Application.Run(af = new AuthenticationForm());
+            if(af.isSuccess())
+            {
+                Application.Run(new EditBrigadeForm(db.Brigades.First(b => b.BrigadeId == 18)));
+            }
+            */
+            Application.Run(new EditBrigadeForm(db.Brigades.First(b => b.BrigadeId == 18)));
 
         }
     }
