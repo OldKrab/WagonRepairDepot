@@ -12,14 +12,14 @@ using System.Windows.Forms;
 
 namespace WagonRepairDepot
 {
-    public partial class RedactorFrom : Form
+    public partial class RedactorForm : Form
     {
         private object _startObject;
         private object _changedOvject;
         private List<IFieldModel> _fields;
         private DbContext _context;
 
-        public RedactorFrom(object @object, Models.IFormModel formModel)
+        public RedactorForm(object @object, Models.IFormModel formModel)
         {
             _context = new Contexts.TrainContext();
             _startObject = @object;

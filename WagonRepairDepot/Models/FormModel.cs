@@ -12,11 +12,11 @@ namespace WagonRepairDepot.Models
     }
 
 
-    class BrigadirFormModel : IFormModel
+    class BrigadierFormModel : IFormModel
     {
         public List<IFieldModel> FieldModels { get; private set; }
 
-        public BrigadirFormModel()
+        public BrigadierFormModel()
         {
             FieldModels = new List<IFieldModel>();
 

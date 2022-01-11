@@ -10,7 +10,7 @@ namespace WagonRepairDepot
         private Label _label;
         private NumericUpDown _numeric;
         public object Value { get => (int)_numeric.Value; set { _numeric.Value = (int)value; } }
-        public int Haight => 35;
+        public int Height => 35;
         public void BindWithWindow(Form form, int x, int y, int width)
         {
             this._label.Location = new System.Drawing.Point(x, y);
@@ -51,7 +51,7 @@ namespace WagonRepairDepot
     {
         private object _object;
         public object Value { get => _object; set { _object = value; } }
-        public int Haight => 35;
+        public int Height => 35;
         public void BindWithWindow(Form form, int x, int y, int width)
         {
         }
@@ -72,7 +72,7 @@ namespace WagonRepairDepot
         private Label _label;
         private TextBox _text;
         public object Value { get => _text.Text; set { _text.Text = (string)value; } }
-        public int Haight => 35;
+        public int Height => 35;
         public void BindWithWindow(Form form, int x, int y, int width)
         {
             this._label.Location = new System.Drawing.Point(x, y);
@@ -113,7 +113,7 @@ namespace WagonRepairDepot
                 _combo.SelectedIndex = Array.IndexOf( _ids, (int)value);
             }
         }
-        public int Haight => 35;
+        public int Height => 35;
         public void BindWithWindow(Form form, int x, int y, int width)
         {
             this._label.Location = new System.Drawing.Point(x, y);
@@ -156,7 +156,7 @@ namespace WagonRepairDepot
         private Label _label;
         private DateTimePicker _date;
         public object Value { get => _date.Value; set { _date.Value =  (DateTime)value; } }
-        public int Haight => 35;
+        public int Height => 35;
         public void BindWithWindow(Form form, int x, int y, int width)
         {
             this._label.Location = new System.Drawing.Point(x, y);
@@ -196,7 +196,7 @@ namespace WagonRepairDepot
         private RadioButton _true_button;
         private RadioButton _false_button;
         public object Value { get => _true_button.Checked; set { _false_button.Checked = !(_true_button.Checked = (bool)value); }}
-        public int Haight => 35;
+        public int Height => 35;
         public void BindWithWindow(Form form, int x, int y, int width)
         {
             this._label.Location = new System.Drawing.Point(x, y);
