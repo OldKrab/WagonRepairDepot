@@ -11,8 +11,8 @@ namespace WagonRepairDepot
         private NumericUpDown _numeric;
         public object Value { get => (int)_numeric.Value; set { _numeric.Value = (int)value; } }
         public int Height => 35;
-
-        public void BindToWindow(Form form, int x, int y, int width)
+        public string Name { get; set; }
+        public void BindWithWindow(Form form, int x, int y, int width)
         {
             this._label.Location = new System.Drawing.Point(x, y);
             this._numeric.Location = new System.Drawing.Point(x, y + 15);
@@ -22,7 +22,7 @@ namespace WagonRepairDepot
             form.Controls.Add(this._numeric);
         }
 
-        public void BindToWindow(Form form)
+        public void BindWithWindow(Form form)
         {
             throw new NotImplementedException();
         }
@@ -37,6 +37,7 @@ namespace WagonRepairDepot
 
         public IntFieldModel(string name)
         {
+            Name = name;
             this._label = new Label();
             this._label.AutoSize = true;
             this._label.Name = name;
@@ -53,10 +54,12 @@ namespace WagonRepairDepot
 
     class HiddenFieldModel : IFieldModel
     {
+        public string Name { get; set; }
+
         private object _object;
         public object Value { get => _object; set { _object = value; } }
         public int Height => 35;
-        public void BindToWindow(Form form, int x, int y, int width)
+        public void BindWithWindow(Form form, int x, int y, int width)
         {
         }
         public void BindWithWindow(Form form)
@@ -65,19 +68,22 @@ namespace WagonRepairDepot
         public void BindWithPanel(FlowLayoutPanel panel)
         {
         }
-        public HiddenFieldModel()
+        public HiddenFieldModel(string name)
         {
+            Name = name;
         }
     }
 
 
     class StringFieldModel : IFieldModel
     {
+        public string Name { get; set; }
+
         private Label _label;
         private TextBox _text;
         public object Value { get => _text.Text; set { _text.Text = (string)value; } }
         public int Height => 35;
-        public void BindToWindow(Form form, int x, int y, int width)
+        public void BindWithWindow(Form form, int x, int y, int width)
         {
             this._label.Location = new System.Drawing.Point(x, y);
             this._text.Location = new System.Drawing.Point(x, y + 15);
@@ -95,6 +101,8 @@ namespace WagonRepairDepot
         }
         public StringFieldModel(string name)
         {
+            Name = name;
+
             this._label = new Label();
             this._label.AutoSize = true;
             this._label.Name = name;
@@ -108,7 +116,9 @@ namespace WagonRepairDepot
     }
 
     class IndexFieldModel : IFieldModel
-    {        
+    {
+        public string Name { get; set; }
+
         private Label _label;
         private ComboBox _combo;
         private int[] _ids;
@@ -118,7 +128,7 @@ namespace WagonRepairDepot
             }
         }
         public int Height => 35;
-        public void BindToWindow(Form form, int x, int y, int width)
+        public void BindWithWindow(Form form, int x, int y, int width)
         {
             this._label.Location = new System.Drawing.Point(x, y);
             this._combo.Location = new System.Drawing.Point(x, y + 15);
@@ -140,6 +150,8 @@ namespace WagonRepairDepot
         }
         public IndexFieldModel(string name, IEnumerable<int> values, IEnumerable<string> items)
         {
+            Name = name;
+
             this._label = new Label();
             this._label.AutoSize = true;
             this._label.Name = name;
@@ -157,11 +169,13 @@ namespace WagonRepairDepot
 
     class DateFieldModel : IFieldModel
     {
+        public string Name { get; set; }
+
         private Label _label;
         private DateTimePicker _date;
         public object Value { get => _date.Value; set { _date.Value =  (DateTime)value; } }
         public int Height => 35;
-        public void BindToWindow(Form form, int x, int y, int width)
+        public void BindWithWindow(Form form, int x, int y, int width)
         {
             this._label.Location = new System.Drawing.Point(x, y);
             this._date.Location = new System.Drawing.Point(x, y + 15);
@@ -183,6 +197,7 @@ namespace WagonRepairDepot
         }
         public DateFieldModel(string name)
         {
+            Name = name;
             this._label = new Label();
             this._label.AutoSize = true;
             this._label.Name = name;
@@ -196,12 +211,14 @@ namespace WagonRepairDepot
 
     class BoolFieldModel : IFieldModel
     {
+        public string Name { get; set; }
+
         private Label _label;
         private RadioButton _true_button;
         private RadioButton _false_button;
         public object Value { get => _true_button.Checked; set { _false_button.Checked = !(_true_button.Checked = (bool)value); }}
         public int Height => 35;
-        public void BindToWindow(Form form, int x, int y, int width)
+        public void BindWithWindow(Form form, int x, int y, int width)
         {
             this._label.Location = new System.Drawing.Point(x, y);
             this._true_button.Location = new System.Drawing.Point(x, y + 15);
@@ -221,16 +238,16 @@ namespace WagonRepairDepot
             panel.Controls.Add(this._true_button);
             panel.Controls.Add(this._false_button);
             this._label.Size = new System.Drawing.Size(panel.Width - 10, 15);
-            this._true_button.Size = new System.Drawing.Size(panel.Width - 10, 20);
-            this._true_button.Size = new System.Drawing.Size(panel.Width - 10, 20);
+            this._true_button.Size = new System.Drawing.Size(panel.Width - 10, 15);
+            this._true_button.Size = new System.Drawing.Size(panel.Width - 10, 15);
         }
 
         public BoolFieldModel(string name, string true_label, string false_label)
         {
+            Name = name;
             this._label = new Label();
             this._label.AutoSize = true;
             this._label.Name = name;
-
             this._label.Text = name;
 
             this._true_button = new RadioButton();
