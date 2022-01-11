@@ -120,5 +120,11 @@ namespace WagonRepairDepot
         {
 
         }
+
+        private void RedactorForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Form ifrm = Application.OpenForms[0];
+            ifrm.Show();
+        }
     }
 }

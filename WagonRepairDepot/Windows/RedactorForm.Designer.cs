@@ -46,6 +46,7 @@ namespace WagonRepairDepot
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "RedactorForm";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RedactorForm_FormClosed);
             this.ResumeLayout(false);
 
         }
