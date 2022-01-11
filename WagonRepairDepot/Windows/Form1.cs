@@ -154,5 +154,10 @@ namespace WagonRepairDepot.Windows
             TrainContext db = new();
             dataGrid.DataSource = actualWagonsCheckbox.Checked ? db.ActualWagons() : db.Wagons.ToList();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormFactory.CreatorForm(new Models.Wagon(), new Models.WagonFormModel()).Show();
+        }
     }
 }

@@ -55,7 +55,7 @@ namespace WagonRepairDepot
 
         private Label _label;
         private DateTimePicker _date;
-        public object Value { get => _date.Value; set { _date.Value =  (DateTime)value; } }
+        public object Value { get => _date.Value; set { try { _date.Value = (DateTime)value; } catch { _date.Value = DateTime.Now; }  } }
         public int Height => 35;
         public void BindWithWindow(Form form, int x, int y, int width)
         {
