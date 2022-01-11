@@ -21,10 +21,12 @@ namespace WagonRepairDepot
             form.Controls.Add(this._label);
             form.Controls.Add(this._numeric);
         }
-        public void BindWithWindow(Form form)
+
+        public void BindToWindow(Form form)
         {
             throw new NotImplementedException();
         }
+
         public void BindWithPanel(FlowLayoutPanel panel)
         {
             panel.Controls.Add(this._label);
@@ -32,6 +34,7 @@ namespace WagonRepairDepot
             this._label.Size = new System.Drawing.Size(panel.Width - 10, 15);
             this._numeric.Size = new System.Drawing.Size(panel.Width - 10, 20);
         }
+
         public IntFieldModel(string name)
         {
             Name = name;
@@ -42,7 +45,7 @@ namespace WagonRepairDepot
             this._label.Text = name;
 
 
-            this._numeric = new System.Windows.Forms.NumericUpDown();
+            this._numeric = new NumericUpDown();
             this._numeric.Name = "name_numeric";
         }
     }
@@ -55,8 +58,8 @@ namespace WagonRepairDepot
 
         private object _object;
         public object Value { get => _object; set { _object = value; } }
-        public int Haight => 35;
-        public void BindWithWindow(Form form, int x, int y, int width)
+        public int Height => 35;
+        public void BindToWindow(Form form, int x, int y, int width)
         {
         }
         public void BindWithWindow(Form form)
@@ -79,8 +82,8 @@ namespace WagonRepairDepot
         private Label _label;
         private TextBox _text;
         public object Value { get => _text.Text; set { _text.Text = (string)value; } }
-        public int Haight => 35;
-        public void BindWithWindow(Form form, int x, int y, int width)
+        public int Height => 35;
+        public void BindToWindow(Form form, int x, int y, int width)
         {
             this._label.Location = new System.Drawing.Point(x, y);
             this._text.Location = new System.Drawing.Point(x, y + 15);
@@ -124,8 +127,8 @@ namespace WagonRepairDepot
                 _combo.SelectedIndex = Array.IndexOf( _ids, (int)value);
             }
         }
-        public int Haight => 35;
-        public void BindWithWindow(Form form, int x, int y, int width)
+        public int Height => 35;
+        public void BindToWindow(Form form, int x, int y, int width)
         {
             this._label.Location = new System.Drawing.Point(x, y);
             this._combo.Location = new System.Drawing.Point(x, y + 15);
@@ -171,8 +174,8 @@ namespace WagonRepairDepot
         private Label _label;
         private DateTimePicker _date;
         public object Value { get => _date.Value; set { _date.Value =  (DateTime)value; } }
-        public int Haight => 35;
-        public void BindWithWindow(Form form, int x, int y, int width)
+        public int Height => 35;
+        public void BindToWindow(Form form, int x, int y, int width)
         {
             this._label.Location = new System.Drawing.Point(x, y);
             this._date.Location = new System.Drawing.Point(x, y + 15);
@@ -214,8 +217,8 @@ namespace WagonRepairDepot
         private RadioButton _true_button;
         private RadioButton _false_button;
         public object Value { get => _true_button.Checked; set { _false_button.Checked = !(_true_button.Checked = (bool)value); }}
-        public int Haight => 35;
-        public void BindWithWindow(Form form, int x, int y, int width)
+        public int Height => 35;
+        public void BindToWindow(Form form, int x, int y, int width)
         {
             this._label.Location = new System.Drawing.Point(x, y);
             this._true_button.Location = new System.Drawing.Point(x, y + 15);

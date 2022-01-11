@@ -1,7 +1,7 @@
 ﻿
 namespace WagonRepairDepot
 {
-    partial class RedactorFrom
+    partial class RedactorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -40,12 +40,13 @@ namespace WagonRepairDepot
             this.flowLayoutPanel1.TabIndex = 0;
             this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // 
-            // RedactorFrom
+            // RedactorForm
             // 
             this.ClientSize = new System.Drawing.Size(455, 538);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Name = "RedactorFrom";
+            this.Name = "RedactorForm";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RedactorForm_FormClosed);
             this.ResumeLayout(false);
 
         }
