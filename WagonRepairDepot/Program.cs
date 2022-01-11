@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace WagonRepairDepot
@@ -14,7 +15,7 @@ namespace WagonRepairDepot
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
+            Application.Run(new RedactorFrom(new Contexts.TrainContext().Brigades.First(), new Models.BrigadeFormModel()));
         }
     }
 }

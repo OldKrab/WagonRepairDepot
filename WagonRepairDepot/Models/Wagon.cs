@@ -8,7 +8,7 @@ namespace WagonRepairDepot.Models
         public int WagonId { get; set; }
         public string Model { get; set; } = null!;
         public string Type { get; set; } = null!;
-        public long SeatsNumber { get; set; }
+        public int SeatsNumber { get; set; }
         public DateTime CreationYear { get; set; }
         public string SerialNumber { get; set; } = null!;
 

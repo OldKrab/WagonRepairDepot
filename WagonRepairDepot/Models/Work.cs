@@ -10,7 +10,6 @@ namespace WagonRepairDepot.Models
         public int BrigadeId { get; set; }
         public int WorkTypeId { get; set; }
         public int WorkOrderId { get; set; }
-
         public virtual Brigade Brigade { get; set; } = null!;
         public virtual WorkOrder WorkOrder { get; set; } = null!;
         public virtual WorkType WorkType { get; set; } = null!;
