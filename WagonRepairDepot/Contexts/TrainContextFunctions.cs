@@ -197,5 +197,45 @@ namespace WagonRepairDepot.Contexts
             cmd.ExecuteNonQuery();
         }
 
+        public static void FinishWork(this TrainContext db, Work work)
+        {
+            using var conn = new NpgsqlConnection(db.Database.GetConnectionString());
+            conn.Open();
+            using var cmd = new NpgsqlCommand($"CALL fire_work({work.WorkId})", conn);
+            cmd.ExecuteNonQuery();
+        }
+
+        public static void FireBrigadier(this TrainContext db, Brigadier brigadier)
+        {
+            using var conn = new NpgsqlConnection(db.Database.GetConnectionString());
+            conn.Open();
+            using var cmd = new NpgsqlCommand($"CALL fire_brigadier({brigadier.BrigadierId})", conn);
+            cmd.ExecuteNonQuery();
+        }
+
+        public static void FireInspector(this TrainContext db, Inspector inspector)
+        {
+            using var conn = new NpgsqlConnection(db.Database.GetConnectionString());
+            conn.Open();
+            using var cmd = new NpgsqlCommand($"CALL fire_inspector({inspector.InspectorId})", conn);
+            cmd.ExecuteNonQuery();
+        }
+
+        public static void FireReceptionist(this TrainContext db, Receptionist receptionist)
+        {
+            using var conn = new NpgsqlConnection(db.Database.GetConnectionString());
+            conn.Open();
+            using var cmd = new NpgsqlCommand($"CALL fire_receptionist({receptionist.ReceptionistId})", conn);
+            cmd.ExecuteNonQuery();
+        }
+
+        public static void FireWorker(this TrainContext db, Worker worker)
+        {
+            using var conn = new NpgsqlConnection(db.Database.GetConnectionString());
+            conn.Open();
+            using var cmd = new NpgsqlCommand($"CALL fire_worker({worker.WorkerId})", conn);
+            cmd.ExecuteNonQuery();
+        }
+
     }
 }
