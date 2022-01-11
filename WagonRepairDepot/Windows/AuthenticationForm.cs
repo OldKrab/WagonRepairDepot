@@ -26,7 +26,7 @@ namespace WagonRepairDepot
         {
             try
             {
-                new RedactorForm(new Contexts.TrainContext(textBoxLogin.Text, textBoxPassword.Text).Brigades.First(), new Models.BrigadeFormModel()).Show();
+                //new RedactorForm(new Contexts.TrainContext(textBoxLogin.Text, textBoxPassword.Text).Brigades.First(), new Models.BrigadeFormModel()).Show();
                 this.Hide();
             }
             catch(Exception ex)

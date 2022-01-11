@@ -90,8 +90,6 @@ namespace WagonRepairDepot
                     field.Name == ((DisplayNameAttribute)a.GetCustomAttribute(typeof(DisplayNameAttribute)))?.DisplayName
                     ).GetValue(_changedOvject);
             }
-
-
         }
 
         private void Save(object? sender, EventArgs e)

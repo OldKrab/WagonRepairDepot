@@ -21,7 +21,7 @@ namespace WagonRepairDepot.Models
 
         public IFieldModel Identificator { get; private set; }
 
-        public BrigadirFormModel()
+        public BrigadierFormModel()
         {
             FieldModels = new List<IFieldModel>();
             FieldModels.Add(Identificator = new HiddenFieldModel("ID"));
