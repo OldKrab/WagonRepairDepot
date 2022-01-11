@@ -74,18 +74,24 @@ namespace WagonRepairDepot
 
         private void Write()
         {
-            foreach(var (property, value) in ReadProperty().Zip(_fields))
+            foreach (var field in _fields)
             {
-                property.SetValue(_changedOvject, value.Value);
+                ReadProperty().Find(a =>
+                    field.Name == ((DisplayNameAttribute)a.GetCustomAttribute(typeof(DisplayNameAttribute)))?.DisplayName
+                    ).SetValue(_changedOvject, field.Value);
             }
         }
 
         private void Read()
         {
-            foreach (var (property, value) in ReadProperty().Zip(_fields))
+            foreach (var field in _fields)
             {
-                value.Value = property.GetValue(_changedOvject);
+                field.Value = ReadProperty().Find(a =>
+                    field.Name == ((DisplayNameAttribute)a.GetCustomAttribute(typeof(DisplayNameAttribute)))?.DisplayName
+                    ).GetValue(_changedOvject);
             }
+
+
         }
 
         private void Save(object? sender, EventArgs e)

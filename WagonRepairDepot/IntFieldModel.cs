@@ -11,6 +11,7 @@ namespace WagonRepairDepot
         private NumericUpDown _numeric;
         public object Value { get => (int)_numeric.Value; set { _numeric.Value = (int)value; } }
         public int Haight => 35;
+        public string Name { get; set; }
         public void BindWithWindow(Form form, int x, int y, int width)
         {
             this._label.Location = new System.Drawing.Point(x, y);
@@ -33,6 +34,7 @@ namespace WagonRepairDepot
         }
         public IntFieldModel(string name)
         {
+            Name = name;
             this._label = new Label();
             this._label.AutoSize = true;
             this._label.Name = name;
@@ -49,6 +51,8 @@ namespace WagonRepairDepot
 
     class HiddenFieldModel : IFieldModel
     {
+        public string Name { get; set; }
+
         private object _object;
         public object Value { get => _object; set { _object = value; } }
         public int Haight => 35;
@@ -61,14 +65,17 @@ namespace WagonRepairDepot
         public void BindWithPanel(FlowLayoutPanel panel)
         {
         }
-        public HiddenFieldModel()
+        public HiddenFieldModel(string name)
         {
+            Name = name;
         }
     }
 
 
     class StringFieldModel : IFieldModel
     {
+        public string Name { get; set; }
+
         private Label _label;
         private TextBox _text;
         public object Value { get => _text.Text; set { _text.Text = (string)value; } }
@@ -91,6 +98,8 @@ namespace WagonRepairDepot
         }
         public StringFieldModel(string name)
         {
+            Name = name;
+
             this._label = new Label();
             this._label.AutoSize = true;
             this._label.Name = name;
@@ -104,7 +113,9 @@ namespace WagonRepairDepot
     }
 
     class IndexFieldModel : IFieldModel
-    {        
+    {
+        public string Name { get; set; }
+
         private Label _label;
         private ComboBox _combo;
         private int[] _ids;
@@ -136,6 +147,8 @@ namespace WagonRepairDepot
         }
         public IndexFieldModel(string name, IEnumerable<int> values, IEnumerable<string> items)
         {
+            Name = name;
+
             this._label = new Label();
             this._label.AutoSize = true;
             this._label.Name = name;
@@ -153,6 +166,8 @@ namespace WagonRepairDepot
 
     class DateFieldModel : IFieldModel
     {
+        public string Name { get; set; }
+
         private Label _label;
         private DateTimePicker _date;
         public object Value { get => _date.Value; set { _date.Value =  (DateTime)value; } }
@@ -179,6 +194,7 @@ namespace WagonRepairDepot
         }
         public DateFieldModel(string name)
         {
+            Name = name;
             this._label = new Label();
             this._label.AutoSize = true;
             this._label.Name = name;
@@ -192,6 +208,8 @@ namespace WagonRepairDepot
 
     class BoolFieldModel : IFieldModel
     {
+        public string Name { get; set; }
+
         private Label _label;
         private RadioButton _true_button;
         private RadioButton _false_button;
@@ -223,10 +241,10 @@ namespace WagonRepairDepot
 
         public BoolFieldModel(string name, string true_label, string false_label)
         {
+            Name = name;
             this._label = new Label();
             this._label.AutoSize = true;
             this._label.Name = name;
-
             this._label.Text = name;
 
             this._true_button = new RadioButton();

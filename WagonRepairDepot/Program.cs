@@ -17,7 +17,7 @@ namespace WagonRepairDepot
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new RedactorFrom(new Contexts.TrainContext().Brigades.First(), new Models.BrigadeFormModel()));
+            Application.Run(new RedactorFrom(new Contexts.TrainContext().Brigadiers.First(), new Models.BrigadirFormModel()));
         }
     }
 }

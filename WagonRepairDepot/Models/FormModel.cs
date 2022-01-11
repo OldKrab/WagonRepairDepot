@@ -8,7 +8,10 @@ namespace WagonRepairDepot.Models
 {
     public interface IFormModel
     {
+        public IFieldModel Identificator { get; }
         public List<IFieldModel> FieldModels { get; }
+
+
     }
 
 
@@ -16,37 +19,17 @@ namespace WagonRepairDepot.Models
     {
         public List<IFieldModel> FieldModels { get; private set; }
 
+        public IFieldModel Identificator { get; private set; }
+
         public BrigadirFormModel()
         {
             FieldModels = new List<IFieldModel>();
-
-            FieldModels.Append(new HiddenFieldModel());
-            FieldModels.Append(new StringFieldModel("Фамилия"));
-            FieldModels.Append(new StringFieldModel("Имя"));
-            FieldModels.Append(new StringFieldModel("Отчество"));
-            FieldModels.Append(new DateFieldModel("Дата найма"));
-            FieldModels.Append(new DateFieldModel("Дата увольнения"));
+            FieldModels.Add(Identificator = new HiddenFieldModel("ID"));
+            FieldModels.Add(new StringFieldModel("Фамилия"));
+            FieldModels.Add(new StringFieldModel("Имя"));
+            FieldModels.Add(new StringFieldModel("Отчество"));
+            FieldModels.Add(new DateFieldModel("Дата найма"));
+            FieldModels.Add(new BoolFieldModel("Пол", "М", "Ж"));
         }
     }
-
-
-    class BrigadeFormModel : IFormModel
-    {
-        public List<IFieldModel> FieldModels { get; private set; }
-
-        public BrigadeFormModel()
-        {
-            Contexts.TrainContext context = new ();
-            FieldModels = new List<IFieldModel>();
-
-            FieldModels.Add(new HiddenFieldModel());
-            FieldModels.Add(new IndexFieldModel(
-                    "Бригадир",
-                    context.Brigadiers.Select(a => a.BrigadierId),
-                    context.Brigadiers.Select(a => a.Surname)
-                )
-            );
-        }
-    }
-
 }
