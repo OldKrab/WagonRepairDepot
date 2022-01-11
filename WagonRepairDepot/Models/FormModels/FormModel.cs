@@ -14,7 +14,6 @@ namespace WagonRepairDepot.Models
 
     }
 
-
     class BrigadierFormModel : IFormModel
     {
         public List<IFieldModel> FieldModels { get; private set; }

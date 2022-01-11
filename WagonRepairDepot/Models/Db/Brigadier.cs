@@ -5,6 +5,11 @@ namespace WagonRepairDepot.Models
 {
     public class Brigadier
     {
+        public Brigadier()
+        {
+            this.HiringDate = DateTime.Now;
+        }
+
         [System.ComponentModel.Browsable(false)]
         [System.ComponentModel.DisplayName("ID")]
         public int BrigadierId { get; set; }

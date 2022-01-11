@@ -21,7 +21,6 @@ namespace WagonRepairDepot
         private DbContext _context;
         private IFieldModel _index;
 
-
         public RedactorForm(object @object, Models.IFormModel formModel)
         {
             _context = new Contexts.TrainContext();
@@ -34,16 +33,15 @@ namespace WagonRepairDepot
 
             BindPanel(this.flowLayoutPanel1);
             Read();
-            SetSaveButton();
-            SetCreateButton();
-            SetDeleteButton();
-            SetRefreshButton();
+
         }
+
         public void SetSaveButton()
         {
             Button saveButton = new Button();
             saveButton.Text = "Сохранить изменения";
             saveButton.Click += Save;
+            saveButton.Size = new System.Drawing.Size(flowLayoutPanel1.Width - 10, 20);
             this.flowLayoutPanel1.Controls.Add(saveButton);
         }
         public void SetCreateButton()
@@ -51,6 +49,7 @@ namespace WagonRepairDepot
             Button saveButton = new Button();
             saveButton.Text = "Создать";
             saveButton.Click += Create;
+            saveButton.Size = new System.Drawing.Size(flowLayoutPanel1.Width - 10, 20);
             this.flowLayoutPanel1.Controls.Add(saveButton);
         }
         public void SetDeleteButton()
@@ -58,6 +57,7 @@ namespace WagonRepairDepot
             Button saveButton = new Button();
             saveButton.Text = "Удалить";
             saveButton.Click += Delete;
+            saveButton.Size = new System.Drawing.Size(flowLayoutPanel1.Width - 10, 20);
             this.flowLayoutPanel1.Controls.Add(saveButton);
         }
         public void SetRefreshButton()
@@ -65,8 +65,12 @@ namespace WagonRepairDepot
             Button saveButton = new Button();
             saveButton.Text = "Обновить";
             saveButton.Click += Refresh;
+            saveButton.Size = new System.Drawing.Size(flowLayoutPanel1.Width - 10, 20);
+
             this.flowLayoutPanel1.Controls.Add(saveButton);
         }
+
+
         private void BindPanel(FlowLayoutPanel panel)
         {
             foreach(var field in _fields)
@@ -77,6 +81,13 @@ namespace WagonRepairDepot
         private List<PropertyInfo> ReadProperty()
         {
             return _startObject.GetType().GetProperties().ToList();
+        }
+        public void MadeReadOnly()
+        {
+            foreach (var field in _fields)
+            {
+                field.MadeReadOnly();
+            }
         }
         private void Write()
         {
@@ -96,16 +107,31 @@ namespace WagonRepairDepot
                     ).GetValue(_changedOvject);
             }
         }
+
+
+
         private void Save(object? sender, EventArgs e)
         {
-            Write();
-            object origenal = _context.Find(ProxyUtil.GetUnproxiedType(_changedOvject), this._fields.First().Value);
-            foreach (var property in ReadProperty())
+            HandleExist();
+            if (HandleConstant())
             {
-                if (property.SetMethod is not null)
-                    property.SetValue(origenal, property.GetValue(_changedOvject));
+                Write();
+                object origenal = _context.Find(ProxyUtil.GetUnproxiedType(_changedOvject), this._index.Value);
+                foreach (var property in ReadProperty())
+                {
+                    if (property.SetMethod is not null)
+                        property.SetValue(origenal, property.GetValue(_changedOvject));
+                }
+                try
+                {
+                    _context.SaveChanges();
+                    MessageBox.Show("Объект успешно изменен", "Успешно", MessageBoxButtons.OK);
+                }
+                catch (ReferenceConstraintException ex)
+                {
+                    MessageBox.Show($"{ex.InnerException.Message}", "Error");
+                }
             }
-            _context.SaveChanges();
         }
         private void Create(object? sender, EventArgs e)
         {
@@ -113,29 +139,138 @@ namespace WagonRepairDepot
             _index.Value = null;
             Write();
             _context.Add(_changedOvject);
-            _context.SaveChanges();
+            try
+            {
+                _context.SaveChanges();
+                MessageBox.Show("Объект успешно создан", "Успешно", MessageBoxButtons.OK);
+            }
+            catch (ReferenceConstraintException ex)
+            {
+                MessageBox.Show($"{ex.InnerException.Message}", "Error");
+            }
             _index.Value = save_key;
+
+
         }
         private void Delete(object? sender, EventArgs e)
         {
-            Write();
-            _context.Remove(_changedOvject);
-            _context.SaveChanges();
-            //this.Close();
+            HandleExist();
+            if (HandleConstant())
+            {
+                Write();
+                _context.Remove(_changedOvject);
+                try
+                {
+                    _context.SaveChanges();
+                    _context.ChangeTracker.Clear();
+
+                    MessageBox.Show("Объект удален успешно", "Успешно", MessageBoxButtons.OK);
+                    this.Close();
+                }
+                catch (ReferenceConstraintException ex)
+                {
+                    MessageBox.Show($"{ex.InnerException.Message}", "Error");
+                }
+            }
         }
         private void Refresh(object? sender, EventArgs e)
         {
+            HandleExist();
             _changedOvject =_startObject = _context.Find(ProxyUtil.GetUnproxiedType(_changedOvject), _index.Value);
             Read(); 
         }
+
+
+
+        private void HandleExist()
+        {
+            if (!ChecToExist())
+            {
+                var result = MessageBox.Show("Обрабатываемый объект больше не существет в базе данных, вы можете востановить копию объекта в базу данных (да), или прекратить работу с ним (нет). Если вы хотите продолжить работу с копией объекта в режиме только для чтения нажмите кнопку (отмена)", "Объект не обнаружен в базе данных", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.No)
+                {
+                    this.Close();
+                }
+                else if (result == DialogResult.Yes)
+                {
+                    Write();
+                    _context.Add(_changedOvject);
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    //TODO: добавить работу в режиме только для чтения
+                    this.Close();
+                }
+            }
+        }
+        private bool HandleConstant()
+        {
+            if (!ChecToConstant())
+            {
+                var result = MessageBox.Show(
+                    "Обрабатываемый объект был изменен, ваши действия могут привести к непредвиденным резульатам," +
+                    "нажмите на кнопку (да), если все равно собиреатесь продолжить." +
+                    "нажмите на кнопку (нет) если хотите посмотреть изменения объекта." +
+                    "Если вы хотите вернутся к редактированию нажмите на  кнопку (отмена)", "Объект был изменен во время редактирования в базе данных", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.No)
+                {
+                    //TODO: добавить чтение объекта
+                    return false;
+                }
+                else if (result == DialogResult.Yes)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        private bool ChecToExist()
+        {
+            try
+            {
+                _context.Entry(_startObject).State = EntityState.Detached;
+                object origenal = _context.Find(ProxyUtil.GetUnproxiedType(_changedOvject), _index.Value);
+                if (origenal is null)
+                {
+                    return false;
+                }
+                _context.Entry(origenal).State = EntityState.Detached;
+
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+        private bool ChecToConstant()
+        {
+            _context.Entry(_startObject).State = EntityState.Detached;
+            object origenal = _context.Find(ProxyUtil.GetUnproxiedType(_changedOvject), _index.Value);
+            _context.Entry(origenal).State = EntityState.Detached;
+            foreach (var property in ReadProperty())
+            {
+                if (property.GetCustomAttribute(typeof(DisplayNameAttribute)) is not null && ! property.GetValue(origenal).Equals(property.GetValue(_changedOvject)) ){
+                    return false;
+                };
+            }
+            return true;
+        }
+
+
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
         private void RedactorForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Form ifrm = Application.OpenForms[0];
-            ifrm.Show();
+            //Form ifrm = Application.OpenForms[0];
+            //ifrm.Show();
         }
     }
 }

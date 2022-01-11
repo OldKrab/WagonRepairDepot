@@ -22,10 +22,6 @@ namespace WagonRepairDepot
             form.Controls.Add(this._numeric);
         }
 
-        public void BindWithWindow(Form form)
-        {
-            throw new NotImplementedException();
-        }
 
         public void BindWithPanel(FlowLayoutPanel panel)
         {
@@ -33,6 +29,11 @@ namespace WagonRepairDepot
             panel.Controls.Add(this._numeric);
             this._label.Size = new System.Drawing.Size(panel.Width - 10, 15);
             this._numeric.Size = new System.Drawing.Size(panel.Width - 10, 20);
+        }
+
+        public void MadeReadOnly()
+        {
+            _numeric.ReadOnly = true;
         }
 
         public IntFieldModel(string name)
@@ -68,6 +69,11 @@ namespace WagonRepairDepot
         public void BindWithPanel(FlowLayoutPanel panel)
         {
         }
+
+        public void MadeReadOnly()
+        {
+        }
+
         public HiddenFieldModel(string name)
         {
             Name = name;
@@ -91,6 +97,10 @@ namespace WagonRepairDepot
             this._text.Size = new System.Drawing.Size(x + width, 20);
             form.Controls.Add(this._label);
             form.Controls.Add(this._text);
+        }
+        public void MadeReadOnly()
+        {
+            _text.ReadOnly = true;
         }
         public void BindWithPanel(FlowLayoutPanel panel)
         {
@@ -136,6 +146,10 @@ namespace WagonRepairDepot
             this._combo.Size = new System.Drawing.Size(x + width, 20);
             form.Controls.Add(this._label);
             form.Controls.Add(this._combo);
+        }
+        public void MadeReadOnly()
+        {
+            _combo.Enabled = false;
         }
         public void BindWithWindow(Form form)
         {
@@ -195,6 +209,11 @@ namespace WagonRepairDepot
             this._label.Size = new System.Drawing.Size(panel.Width - 10, 15);
             this._date.Size = new System.Drawing.Size(panel.Width - 10, 20);
         }
+
+        public void MadeReadOnly()
+        {
+            _date.Enabled = false;
+        }
         public DateFieldModel(string name)
         {
             Name = name;
@@ -231,7 +250,11 @@ namespace WagonRepairDepot
             form.Controls.Add(this._true_button);
             form.Controls.Add(this._false_button);
         }
-
+        public void MadeReadOnly()
+        {
+            _false_button.Enabled = false;
+            _true_button.Enabled = false;
+        }    
         public void BindWithPanel(FlowLayoutPanel panel)
         {
             panel.Controls.Add(this._label);

@@ -42,7 +42,7 @@ namespace WagonRepairDepot
             // 
             // RedactorForm
             // 
-            this.ClientSize = new System.Drawing.Size(455, 538);
+            this.ClientSize = new System.Drawing.Size(282, 538);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "RedactorForm";
             this.Text = "Form1";
