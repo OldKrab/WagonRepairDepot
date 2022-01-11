@@ -53,6 +53,8 @@ namespace WagonRepairDepot.Windows
             this.worksButton = new System.Windows.Forms.Button();
             this.docsButton = new System.Windows.Forms.Button();
             this.usersButton = new System.Windows.Forms.Button();
+            this.exportButton = new System.Windows.Forms.Button();
+            this.saveExportFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.button1 = new System.Windows.Forms.Button();
             this.pages.SuspendLayout();
             this.wagonsPage.SuspendLayout();
@@ -353,7 +355,16 @@ namespace WagonRepairDepot.Windows
             this.usersButton.Click += new System.EventHandler(this.UsersButtonClick);
             // 
             // button1
+            // exportButton
             // 
+            this.exportButton.Location = new System.Drawing.Point(12, 441);
+            this.exportButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.exportButton.Name = "exportButton";
+            this.exportButton.Size = new System.Drawing.Size(164, 50);
+            this.exportButton.TabIndex = 5;
+            this.exportButton.Text = "Экспортировать текущую таблицу";
+            this.exportButton.UseVisualStyleBackColor = true;
+            this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
             this.button1.Location = new System.Drawing.Point(671, 5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(115, 31);
@@ -366,6 +377,8 @@ namespace WagonRepairDepot.Windows
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1013, 500);
+            this.Controls.Add(this.exportButton);
             this.ClientSize = new System.Drawing.Size(1013, 500);
             this.Controls.Add(this.usersButton);
             this.Controls.Add(this.docsButton);
@@ -415,5 +428,7 @@ namespace WagonRepairDepot.Windows
         private System.Windows.Forms.Button editBrigadeButton;
         private System.Windows.Forms.Button deleteBrigadeButton;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button exportButton;
+        private System.Windows.Forms.SaveFileDialog saveExportFileDialog;
     }
 }

@@ -7,6 +7,9 @@ using System.Windows.Forms;
 using WagonRepairDepot.Contexts;
 using WagonRepairDepot.Controllers;
 
+using Syncfusion.XlsIO;
+using System.IO;
+
 namespace WagonRepairDepot.Windows
 {
     public partial class Form1 : Form
@@ -155,9 +158,43 @@ namespace WagonRepairDepot.Windows
             dataGrid.DataSource = actualWagonsCheckbox.Checked ? db.ActualWagons() : db.Wagons.ToList();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void exportButton_Click(object sender, EventArgs e)
         {
-            FormFactory.CreatorForm(new Models.Wagon(), new Models.WagonFormModel()).Show();
+            saveExportFileDialog = new SaveFileDialog();
+            saveExportFileDialog.Filter = "Excel|*.xls;*.xlsx;";
+
+            if (saveExportFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                var fileName = saveExportFileDialog.FileName;
+
+                using (ExcelEngine excelEngine = new ExcelEngine())
+                {
+                    IApplication application = excelEngine.Excel;
+                    application.DefaultVersion = ExcelVersion.Excel2016;
+                    IWorkbook workbook = application.Workbooks.Create(1);
+                    IWorksheet worksheet = workbook.Worksheets[0];
+
+                    for (int i = 1; i < dataGrid.Columns.Count + 1; i++)
+                    {
+                        worksheet.Range[1, i].Text = dataGrid.Columns[i - 1].HeaderText;
+                    }
+                    worksheet.Name = pages.SelectedTab.Name;
+                    for (int i = 0; i < dataGrid.Rows.Count; i++)
+                    {
+                        for (int j = 0; j < dataGrid.Columns.Count; j++)
+                        {
+                            if (dataGrid.Rows[i].Cells[j].Value != null)
+                                worksheet.Range[i + 2, j + 1].Text = dataGrid.Rows[i].Cells[j].Value.ToString();
+                        }
+                    }
+                    FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite);
+                    workbook.SaveAs(stream);
+
+                    stream.Dispose();
+                    workbook.Close();
+                    excelEngine.Dispose();
+                }
+            }
         }
     }
 }
