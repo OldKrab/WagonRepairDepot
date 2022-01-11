@@ -32,6 +32,7 @@ namespace WagonRepairDepot.Windows
             this.wagonsButton = new System.Windows.Forms.Button();
             this.pages = new System.Windows.Forms.TabControl();
             this.wagonsPage = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.actualWagonsCheckbox = new System.Windows.Forms.CheckBox();
             this.dataGrid = new System.Windows.Forms.DataGridView();
             this.worksPage = new System.Windows.Forms.TabPage();
@@ -55,7 +56,6 @@ namespace WagonRepairDepot.Windows
             this.usersButton = new System.Windows.Forms.Button();
             this.exportButton = new System.Windows.Forms.Button();
             this.saveExportFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.button1 = new System.Windows.Forms.Button();
             this.pages.SuspendLayout();
             this.wagonsPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
@@ -108,6 +108,16 @@ namespace WagonRepairDepot.Windows
             this.wagonsPage.Size = new System.Drawing.Size(792, 474);
             this.wagonsPage.TabIndex = 1;
             this.wagonsPage.Text = "wagonsPage";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(671, 5);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(115, 31);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // actualWagonsCheckbox
             // 
@@ -195,7 +205,7 @@ namespace WagonRepairDepot.Windows
             this.retDocPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.retDocPage.Name = "retDocPage";
             this.retDocPage.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.retDocPage.Size = new System.Drawing.Size(786, 448);
+            this.retDocPage.Size = new System.Drawing.Size(784, 446);
             this.retDocPage.TabIndex = 1;
             this.retDocPage.Text = "Заявления на выдачу вагона";
             this.retDocPage.UseVisualStyleBackColor = true;
@@ -205,7 +215,7 @@ namespace WagonRepairDepot.Windows
             this.orderPage.Location = new System.Drawing.Point(4, 24);
             this.orderPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.orderPage.Name = "orderPage";
-            this.orderPage.Size = new System.Drawing.Size(786, 448);
+            this.orderPage.Size = new System.Drawing.Size(784, 446);
             this.orderPage.TabIndex = 2;
             this.orderPage.Text = "Заказ-наряды";
             this.orderPage.UseVisualStyleBackColor = true;
@@ -254,7 +264,7 @@ namespace WagonRepairDepot.Windows
             this.workersPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.workersPage.Name = "workersPage";
             this.workersPage.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.workersPage.Size = new System.Drawing.Size(786, 448);
+            this.workersPage.Size = new System.Drawing.Size(784, 446);
             this.workersPage.TabIndex = 1;
             this.workersPage.Text = "Работники";
             this.workersPage.UseVisualStyleBackColor = true;
@@ -264,7 +274,7 @@ namespace WagonRepairDepot.Windows
             this.inspectorsPage.Location = new System.Drawing.Point(4, 24);
             this.inspectorsPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.inspectorsPage.Name = "inspectorsPage";
-            this.inspectorsPage.Size = new System.Drawing.Size(786, 448);
+            this.inspectorsPage.Size = new System.Drawing.Size(784, 446);
             this.inspectorsPage.TabIndex = 2;
             this.inspectorsPage.Text = "Осмотрщики";
             this.inspectorsPage.UseVisualStyleBackColor = true;
@@ -274,7 +284,7 @@ namespace WagonRepairDepot.Windows
             this.receptionistsPage.Location = new System.Drawing.Point(4, 24);
             this.receptionistsPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.receptionistsPage.Name = "receptionistsPage";
-            this.receptionistsPage.Size = new System.Drawing.Size(786, 448);
+            this.receptionistsPage.Size = new System.Drawing.Size(784, 446);
             this.receptionistsPage.TabIndex = 3;
             this.receptionistsPage.Text = "Приемщики";
             this.receptionistsPage.UseVisualStyleBackColor = true;
@@ -284,7 +294,7 @@ namespace WagonRepairDepot.Windows
             this.brigadiersPage.Location = new System.Drawing.Point(4, 24);
             this.brigadiersPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.brigadiersPage.Name = "brigadiersPage";
-            this.brigadiersPage.Size = new System.Drawing.Size(786, 448);
+            this.brigadiersPage.Size = new System.Drawing.Size(784, 446);
             this.brigadiersPage.TabIndex = 4;
             this.brigadiersPage.Text = "Бригадиры";
             this.brigadiersPage.UseVisualStyleBackColor = true;
@@ -296,7 +306,7 @@ namespace WagonRepairDepot.Windows
             this.brigadesPage.Location = new System.Drawing.Point(4, 24);
             this.brigadesPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.brigadesPage.Name = "brigadesPage";
-            this.brigadesPage.Size = new System.Drawing.Size(786, 448);
+            this.brigadesPage.Size = new System.Drawing.Size(784, 446);
             this.brigadesPage.TabIndex = 5;
             this.brigadesPage.Text = "Бригады";
             this.brigadesPage.UseVisualStyleBackColor = true;
@@ -354,7 +364,6 @@ namespace WagonRepairDepot.Windows
             this.usersButton.UseVisualStyleBackColor = true;
             this.usersButton.Click += new System.EventHandler(this.UsersButtonClick);
             // 
-            // button1
             // exportButton
             // 
             this.exportButton.Location = new System.Drawing.Point(12, 441);
@@ -365,13 +374,6 @@ namespace WagonRepairDepot.Windows
             this.exportButton.Text = "Экспортировать текущую таблицу";
             this.exportButton.UseVisualStyleBackColor = true;
             this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
-            this.button1.Location = new System.Drawing.Point(671, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(115, 31);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
@@ -379,7 +381,6 @@ namespace WagonRepairDepot.Windows
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1013, 500);
             this.Controls.Add(this.exportButton);
-            this.ClientSize = new System.Drawing.Size(1013, 500);
             this.Controls.Add(this.usersButton);
             this.Controls.Add(this.docsButton);
             this.Controls.Add(this.worksButton);

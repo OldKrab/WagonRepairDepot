@@ -196,5 +196,10 @@ namespace WagonRepairDepot.Windows
                 }
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormFactory.CreatorForm(new Models.Wagon(), new Models.WagonFormModel()).Show();
+        }
     }
 }
