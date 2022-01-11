@@ -41,6 +41,7 @@ namespace WagonRepairDepot
             Button saveButton = new Button();
             saveButton.Text = "Сохранить изменения";
             saveButton.Click += Save;
+            saveButton.Size = new System.Drawing.Size(flowLayoutPanel1.Width - 10, 20);
             this.flowLayoutPanel1.Controls.Add(saveButton);
         }
         public void SetCreateButton()
@@ -48,6 +49,7 @@ namespace WagonRepairDepot
             Button saveButton = new Button();
             saveButton.Text = "Создать";
             saveButton.Click += Create;
+            saveButton.Size = new System.Drawing.Size(flowLayoutPanel1.Width - 10, 20);
             this.flowLayoutPanel1.Controls.Add(saveButton);
         }
         public void SetDeleteButton()
@@ -55,6 +57,7 @@ namespace WagonRepairDepot
             Button saveButton = new Button();
             saveButton.Text = "Удалить";
             saveButton.Click += Delete;
+            saveButton.Size = new System.Drawing.Size(flowLayoutPanel1.Width - 10, 20);
             this.flowLayoutPanel1.Controls.Add(saveButton);
         }
         public void SetRefreshButton()
@@ -62,8 +65,12 @@ namespace WagonRepairDepot
             Button saveButton = new Button();
             saveButton.Text = "Обновить";
             saveButton.Click += Refresh;
+            saveButton.Size = new System.Drawing.Size(flowLayoutPanel1.Width - 10, 20);
+
             this.flowLayoutPanel1.Controls.Add(saveButton);
         }
+
+
         private void BindPanel(FlowLayoutPanel panel)
         {
             foreach(var field in _fields)
@@ -75,7 +82,6 @@ namespace WagonRepairDepot
         {
             return _startObject.GetType().GetProperties().ToList();
         }
-
         public void MadeReadOnly()
         {
             foreach (var field in _fields)
@@ -83,8 +89,6 @@ namespace WagonRepairDepot
                 field.MadeReadOnly();
             }
         }
-
-
         private void Write()
         {
             foreach (var field in _fields)
@@ -104,7 +108,8 @@ namespace WagonRepairDepot
             }
         }
 
-  
+
+
         private void Save(object? sender, EventArgs e)
         {
             HandleExist();
@@ -117,7 +122,15 @@ namespace WagonRepairDepot
                     if (property.SetMethod is not null)
                         property.SetValue(origenal, property.GetValue(_changedOvject));
                 }
-                _context.SaveChanges();
+                try
+                {
+                    _context.SaveChanges();
+                    MessageBox.Show("Объект успешно изменен", "Успешно", MessageBoxButtons.OK);
+                }
+                catch (ReferenceConstraintException ex)
+                {
+                    MessageBox.Show($"{ex.InnerException.Message}", "Error");
+                }
             }
         }
         private void Create(object? sender, EventArgs e)
@@ -126,8 +139,18 @@ namespace WagonRepairDepot
             _index.Value = null;
             Write();
             _context.Add(_changedOvject);
-            _context.SaveChanges();
+            try
+            {
+                _context.SaveChanges();
+                MessageBox.Show("Объект успешно создан", "Успешно", MessageBoxButtons.OK);
+            }
+            catch (ReferenceConstraintException ex)
+            {
+                MessageBox.Show($"{ex.InnerException.Message}", "Error");
+            }
             _index.Value = save_key;
+
+
         }
         private void Delete(object? sender, EventArgs e)
         {
@@ -136,9 +159,18 @@ namespace WagonRepairDepot
             {
                 Write();
                 _context.Remove(_changedOvject);
-                _context.SaveChanges();
-                _context.ChangeTracker.Clear();
-                this.Close();
+                try
+                {
+                    _context.SaveChanges();
+                    _context.ChangeTracker.Clear();
+
+                    MessageBox.Show("Объект удален успешно", "Успешно", MessageBoxButtons.OK);
+                    this.Close();
+                }
+                catch (ReferenceConstraintException ex)
+                {
+                    MessageBox.Show($"{ex.InnerException.Message}", "Error");
+                }
             }
         }
         private void Refresh(object? sender, EventArgs e)
@@ -147,6 +179,7 @@ namespace WagonRepairDepot
             _changedOvject =_startObject = _context.Find(ProxyUtil.GetUnproxiedType(_changedOvject), _index.Value);
             Read(); 
         }
+
 
 
         private void HandleExist()
@@ -228,7 +261,6 @@ namespace WagonRepairDepot
             }
             return true;
         }
-
 
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)

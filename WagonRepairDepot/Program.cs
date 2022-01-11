@@ -27,7 +27,7 @@ namespace WagonRepairDepot
                 Application.Run(new EditBrigadeForm(db.Brigades.First(b => b.BrigadeId == 18)));
             }
             */
-            Application.Run(new EditBrigadeForm(db.Brigades.First(b => b.BrigadeId == 18)));
+            Application.Run(FormFactory.FullForm(new Contexts.TrainContext().Brigadiers.First(), new Models.BrigadierFormModel() ));
 
         }
     }
