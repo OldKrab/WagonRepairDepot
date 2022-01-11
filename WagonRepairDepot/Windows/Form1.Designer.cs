@@ -36,6 +36,7 @@ namespace WagonRepairDepot.Windows
             this.actualWagonsCheckbox = new System.Windows.Forms.CheckBox();
             this.dataGrid = new System.Windows.Forms.DataGridView();
             this.worksPage = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
             this.docsPage = new System.Windows.Forms.TabPage();
             this.docPages = new System.Windows.Forms.TabControl();
             this.recDocPage = new System.Windows.Forms.TabPage();
@@ -59,6 +60,7 @@ namespace WagonRepairDepot.Windows
             this.pages.SuspendLayout();
             this.wagonsPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
+            this.worksPage.SuspendLayout();
             this.docsPage.SuspendLayout();
             this.docPages.SuspendLayout();
             this.usersPage.SuspendLayout();
@@ -156,6 +158,7 @@ namespace WagonRepairDepot.Windows
             // worksPage
             // 
             this.worksPage.BackColor = System.Drawing.Color.White;
+            this.worksPage.Controls.Add(this.button2);
             this.worksPage.Location = new System.Drawing.Point(27, 4);
             this.worksPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.worksPage.Name = "worksPage";
@@ -163,6 +166,16 @@ namespace WagonRepairDepot.Windows
             this.worksPage.Size = new System.Drawing.Size(792, 474);
             this.worksPage.TabIndex = 0;
             this.worksPage.Text = "worksPage";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(608, 5);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(178, 31);
+            this.button2.TabIndex = 0;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // docsPage
             // 
@@ -393,6 +406,7 @@ namespace WagonRepairDepot.Windows
             this.wagonsPage.ResumeLayout(false);
             this.wagonsPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).EndInit();
+            this.worksPage.ResumeLayout(false);
             this.docsPage.ResumeLayout(false);
             this.docPages.ResumeLayout(false);
             this.usersPage.ResumeLayout(false);
@@ -431,5 +445,6 @@ namespace WagonRepairDepot.Windows
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button exportButton;
         private System.Windows.Forms.SaveFileDialog saveExportFileDialog;
+        private System.Windows.Forms.Button button2;
     }
 }
