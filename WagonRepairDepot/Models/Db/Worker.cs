@@ -31,5 +31,10 @@ namespace WagonRepairDepot.Models
 
         [System.ComponentModel.Browsable(false)]
         public virtual ICollection<WorkerBrigade> WorkerBrigades { get; set; } = new HashSet<WorkerBrigade>();
+
+        public override string ToString()
+        {
+            return $"{Surname} {Name}" + (Middlename == null ? "" : $" {Middlename}");
+        }
     }
 }

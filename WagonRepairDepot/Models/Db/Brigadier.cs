@@ -36,5 +36,10 @@ namespace WagonRepairDepot.Models
 
         [System.ComponentModel.Browsable(false)]
         public virtual ICollection<WagonReturnDoc> WagonReturnDocs { get; set; } = new HashSet<WagonReturnDoc>();
+
+        public override string ToString()
+        {
+            return $"{Surname} {Name}" + (Middlename == null ? "" : $" {Middlename}");
+        }
     }
 }

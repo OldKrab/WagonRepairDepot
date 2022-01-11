@@ -41,15 +41,15 @@ namespace WagonRepairDepot.Windows
             this.retDocPage = new System.Windows.Forms.TabPage();
             this.orderPage = new System.Windows.Forms.TabPage();
             this.usersPage = new System.Windows.Forms.TabPage();
-            this.worksButton = new System.Windows.Forms.Button();
-            this.docsButton = new System.Windows.Forms.Button();
-            this.usersButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.clientsPage = new System.Windows.Forms.TabPage();
             this.workersPage = new System.Windows.Forms.TabPage();
             this.inspectorsPage = new System.Windows.Forms.TabPage();
             this.receptionistsPage = new System.Windows.Forms.TabPage();
             this.brigadiersPage = new System.Windows.Forms.TabPage();
+            this.worksButton = new System.Windows.Forms.Button();
+            this.docsButton = new System.Windows.Forms.Button();
+            this.usersButton = new System.Windows.Forms.Button();
             this.pages.SuspendLayout();
             this.wagonsPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
@@ -83,7 +83,7 @@ namespace WagonRepairDepot.Windows
             this.pages.Multiline = true;
             this.pages.Name = "pages";
             this.pages.SelectedIndex = 0;
-            this.pages.Size = new System.Drawing.Size(583, 426);
+            this.pages.Size = new System.Drawing.Size(941, 642);
             this.pages.TabIndex = 1;
             // 
             // wagonsPage
@@ -198,40 +198,10 @@ namespace WagonRepairDepot.Windows
             this.usersPage.Controls.Add(this.tabControl1);
             this.usersPage.Location = new System.Drawing.Point(30, 4);
             this.usersPage.Name = "usersPage";
-            this.usersPage.Size = new System.Drawing.Size(549, 418);
+            this.usersPage.Size = new System.Drawing.Size(907, 634);
             this.usersPage.TabIndex = 3;
             this.usersPage.Text = "usersPage";
             this.usersPage.UseVisualStyleBackColor = true;
-            // 
-            // worksButton
-            // 
-            this.worksButton.Location = new System.Drawing.Point(12, 85);
-            this.worksButton.Name = "worksButton";
-            this.worksButton.Size = new System.Drawing.Size(187, 67);
-            this.worksButton.TabIndex = 2;
-            this.worksButton.Text = "Работы";
-            this.worksButton.UseVisualStyleBackColor = true;
-            this.worksButton.Click += new System.EventHandler(this.WorksButtonClick);
-            // 
-            // docsButton
-            // 
-            this.docsButton.Location = new System.Drawing.Point(12, 158);
-            this.docsButton.Name = "docsButton";
-            this.docsButton.Size = new System.Drawing.Size(187, 67);
-            this.docsButton.TabIndex = 3;
-            this.docsButton.Text = "Документы";
-            this.docsButton.UseVisualStyleBackColor = true;
-            this.docsButton.Click += new System.EventHandler(this.DocsButtonClick);
-            // 
-            // usersButton
-            // 
-            this.usersButton.Location = new System.Drawing.Point(12, 231);
-            this.usersButton.Name = "usersButton";
-            this.usersButton.Size = new System.Drawing.Size(187, 67);
-            this.usersButton.TabIndex = 4;
-            this.usersButton.Text = "Пользователи";
-            this.usersButton.UseVisualStyleBackColor = true;
-            this.usersButton.Click += new System.EventHandler(this.UsersButtonClick);
             // 
             // tabControl1
             // 
@@ -244,7 +214,7 @@ namespace WagonRepairDepot.Windows
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(549, 418);
+            this.tabControl1.Size = new System.Drawing.Size(907, 634);
             this.tabControl1.TabIndex = 0;
             // 
             // clientsPage
@@ -252,7 +222,7 @@ namespace WagonRepairDepot.Windows
             this.clientsPage.Location = new System.Drawing.Point(4, 29);
             this.clientsPage.Name = "clientsPage";
             this.clientsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.clientsPage.Size = new System.Drawing.Size(541, 385);
+            this.clientsPage.Size = new System.Drawing.Size(899, 601);
             this.clientsPage.TabIndex = 0;
             this.clientsPage.Text = "Клиенты";
             this.clientsPage.UseVisualStyleBackColor = true;
@@ -294,11 +264,41 @@ namespace WagonRepairDepot.Windows
             this.brigadiersPage.Text = "Бригадиры";
             this.brigadiersPage.UseVisualStyleBackColor = true;
             // 
+            // worksButton
+            // 
+            this.worksButton.Location = new System.Drawing.Point(12, 85);
+            this.worksButton.Name = "worksButton";
+            this.worksButton.Size = new System.Drawing.Size(187, 67);
+            this.worksButton.TabIndex = 2;
+            this.worksButton.Text = "Работы";
+            this.worksButton.UseVisualStyleBackColor = true;
+            this.worksButton.Click += new System.EventHandler(this.WorksButtonClick);
+            // 
+            // docsButton
+            // 
+            this.docsButton.Location = new System.Drawing.Point(12, 158);
+            this.docsButton.Name = "docsButton";
+            this.docsButton.Size = new System.Drawing.Size(187, 67);
+            this.docsButton.TabIndex = 3;
+            this.docsButton.Text = "Документы";
+            this.docsButton.UseVisualStyleBackColor = true;
+            this.docsButton.Click += new System.EventHandler(this.DocsButtonClick);
+            // 
+            // usersButton
+            // 
+            this.usersButton.Location = new System.Drawing.Point(12, 231);
+            this.usersButton.Name = "usersButton";
+            this.usersButton.Size = new System.Drawing.Size(187, 67);
+            this.usersButton.TabIndex = 4;
+            this.usersButton.Text = "Пользователи";
+            this.usersButton.UseVisualStyleBackColor = true;
+            this.usersButton.Click += new System.EventHandler(this.UsersButtonClick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1158, 666);
             this.Controls.Add(this.usersButton);
             this.Controls.Add(this.docsButton);
             this.Controls.Add(this.worksButton);

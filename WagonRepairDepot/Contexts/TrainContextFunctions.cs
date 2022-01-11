@@ -13,7 +13,7 @@ namespace WagonRepairDepot.Contexts
         {
             return db.Wagons.FromSqlRaw($"select * from wagon_inspect_by({inspector.InspectorId});").ToList();
         }
-
+        
         public static List<Wagon> ActualWagons(this TrainContext db)
         {
             return db.Wagons.FromSqlRaw($"select * from actual_wagon;").ToList();
@@ -22,6 +22,11 @@ namespace WagonRepairDepot.Contexts
         public static List<Wagon> ClientWagons(this TrainContext db, Client client)
         {
             return db.Wagons.FromSqlRaw($"select * from client_wagon({client.ClientId});").ToList();
+        }
+
+        public static List<Worker> GetWorkersInBrigade(this TrainContext db, Brigade brigade)
+        {
+            return db.Workers.FromSqlRaw($"select * from get_workers_in_brigade({brigade.BrigadeId});").ToList();
         }
 
         public static Brigade CreateBrigade(this TrainContext db, Brigadier brigadier)
@@ -156,10 +161,6 @@ namespace WagonRepairDepot.Contexts
             return db.Works.FromSqlRaw($"select * from get_works_perfomed_by_worker({worker.WorkerId});").ToList();
         }
 
-        public static List<Wagon> WagonInspectBy(this TrainContext db, Inspector inspector)
-        {
-            return db.Wagons.FromSqlRaw($"select * from wagon_inspect_by({inspector.InspectorId});").ToList();
-        }
 
         public static List<Wagon> WagonReceptBy(this TrainContext db, Receptionist receptionist)
         {
@@ -176,6 +177,61 @@ namespace WagonRepairDepot.Contexts
             return db.Wagons.FromSqlRaw($"select * from wagon_response_by({brigadier.BrigadierId});").ToList();
         }
 
+
+        public static void InsertWorkerIntoBrigade(this TrainContext db,  Worker worker,Brigade brigade)
+        {
+            using var conn = new NpgsqlConnection(db.Database.GetConnectionString());
+            conn.Open();
+            using var cmd = new NpgsqlCommand($"CALL insert_worker_into_brigade({worker.WorkerId}, {brigade.BrigadeId})", conn);
+            cmd.ExecuteNonQuery();
+        }
+        public static void RemoveWorkerFromBrigade(this TrainContext db,  Worker worker,Brigade brigade)
+        {
+            using var conn = new NpgsqlConnection(db.Database.GetConnectionString());
+            conn.Open();
+            using var cmd = new NpgsqlCommand($"CALL remove_worker_from_brigade({worker.WorkerId}, {brigade.BrigadeId})", conn);
+            cmd.ExecuteNonQuery();
+        }
+
+        public static void FinishWork(this TrainContext db, Work work)
+        {
+            using var conn = new NpgsqlConnection(db.Database.GetConnectionString());
+            conn.Open();
+            using var cmd = new NpgsqlCommand($"CALL fire_work({work.WorkId})", conn);
+            cmd.ExecuteNonQuery();
+        }
+
+        public static void FireBrigadier(this TrainContext db, Brigadier brigadier)
+        {
+            using var conn = new NpgsqlConnection(db.Database.GetConnectionString());
+            conn.Open();
+            using var cmd = new NpgsqlCommand($"CALL fire_brigadier({brigadier.BrigadierId})", conn);
+            cmd.ExecuteNonQuery();
+        }
+
+        public static void FireInspector(this TrainContext db, Inspector inspector)
+        {
+            using var conn = new NpgsqlConnection(db.Database.GetConnectionString());
+            conn.Open();
+            using var cmd = new NpgsqlCommand($"CALL fire_inspector({inspector.InspectorId})", conn);
+            cmd.ExecuteNonQuery();
+        }
+
+        public static void FireReceptionist(this TrainContext db, Receptionist receptionist)
+        {
+            using var conn = new NpgsqlConnection(db.Database.GetConnectionString());
+            conn.Open();
+            using var cmd = new NpgsqlCommand($"CALL fire_receptionist({receptionist.ReceptionistId})", conn);
+            cmd.ExecuteNonQuery();
+        }
+
+        public static void FireWorker(this TrainContext db, Worker worker)
+        {
+            using var conn = new NpgsqlConnection(db.Database.GetConnectionString());
+            conn.Open();
+            using var cmd = new NpgsqlCommand($"CALL fire_worker({worker.WorkerId})", conn);
+            cmd.ExecuteNonQuery();
+        }
 
     }
 }
