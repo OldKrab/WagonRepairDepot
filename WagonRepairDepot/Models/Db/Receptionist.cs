@@ -4,6 +4,8 @@ namespace WagonRepairDepot.Models
 {
     public class Receptionist
     {
+        [System.ComponentModel.DisplayName("ID")]
+
         [System.ComponentModel.Browsable(false)]
         public int ReceptionistId { get; set; }
 
@@ -22,9 +24,9 @@ namespace WagonRepairDepot.Models
         [System.ComponentModel.DisplayName("Дата увольнения")]
         public DateTime? DismissalDate { get; set; }
 
-        [System.ComponentModel.DisplayName("Пол")]
+        [System.ComponentModel.DisplayName("Пол ")]
         public string SexString => Sex ? "Мужской" : "Женский";
-
+        [System.ComponentModel.DisplayName("Пол")]
         [System.ComponentModel.Browsable(false)]
         public bool Sex { get; set; }
     }

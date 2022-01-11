@@ -4,6 +4,7 @@ namespace WagonRepairDepot.Models
 {
     public class WagonReceptionDoc
     {
+        [System.ComponentModel.DisplayName("ID")]
         [System.ComponentModel.Browsable(false)]
         public int RecDocId { get; set; }
 
@@ -25,12 +26,15 @@ namespace WagonRepairDepot.Models
         [System.ComponentModel.DisplayName("Серийный номер вагона")]
         public string WagonSerialNumber => Wagon.SerialNumber;
 
+        [System.ComponentModel.DisplayName("Вагон")]
         [System.ComponentModel.Browsable(false)]
         public int WagonId { get; set; }
-        
+
+        [System.ComponentModel.DisplayName("Клиент")]
         [System.ComponentModel.Browsable(false)]
         public int ClientId { get; set; }
-        
+
+        [System.ComponentModel.DisplayName("Осмоторщик")]
         [System.ComponentModel.Browsable(false)]
         public int ReceptionistId { get; set; }
 

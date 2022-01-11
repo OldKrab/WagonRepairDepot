@@ -5,6 +5,7 @@ namespace WagonRepairDepot.Models
 {
     public class Wagon
     {
+        [System.ComponentModel.DisplayName("ID")]
         [System.ComponentModel.Browsable(false)]
         public int WagonId { get; set; }
         

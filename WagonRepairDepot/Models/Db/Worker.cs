@@ -6,6 +6,7 @@ namespace WagonRepairDepot.Models
     public class Worker
     {
         [System.ComponentModel.Browsable(false)]
+        [System.ComponentModel.DisplayName("ID")]
         public int WorkerId { get; set; }
 
         [System.ComponentModel.DisplayName("Фамилия")]
@@ -23,9 +24,10 @@ namespace WagonRepairDepot.Models
         [System.ComponentModel.DisplayName("Дата увольнения")]
         public DateTime? DismissalDate { get; set; }
 
-        [System.ComponentModel.DisplayName("Пол")]
+        [System.ComponentModel.DisplayName("Пол ")]
         public string SexString => Sex ? "Мужской" : "Женский";
 
+        [System.ComponentModel.DisplayName("Пол")]
         [System.ComponentModel.Browsable(false)]
         public bool Sex { get; set; }
 

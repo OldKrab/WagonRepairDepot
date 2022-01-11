@@ -4,6 +4,7 @@ namespace WagonRepairDepot.Models
 {
     public class Client
     {
+        [System.ComponentModel.DisplayName("ID")]
         [System.ComponentModel.Browsable(false)]
         public int ClientId { get; set; }
         
@@ -16,9 +17,10 @@ namespace WagonRepairDepot.Models
         [System.ComponentModel.DisplayName("Отчество")]
         public string? Middlename { get; set; }
 
-        [System.ComponentModel.DisplayName("Пол")]
+        [System.ComponentModel.DisplayName("Пол ")]
         public string SexString => Sex ? "Мужской" : "Женский";
 
+        [System.ComponentModel.DisplayName("Пол")]
         [System.ComponentModel.Browsable(false)]
         public bool Sex { get; set; }
 

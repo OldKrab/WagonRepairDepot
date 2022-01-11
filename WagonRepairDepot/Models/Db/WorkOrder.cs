@@ -5,6 +5,7 @@ namespace WagonRepairDepot.Models
 {
     public class WorkOrder
     {
+        [System.ComponentModel.DisplayName("ID")]
         [System.ComponentModel.Browsable(false)]
         public int WorkOrderId { get; set; }
 
@@ -17,9 +18,10 @@ namespace WagonRepairDepot.Models
         [System.ComponentModel.DisplayName("Серийный номер вагона")]
         public string WagonSerialNumber => Wagon.SerialNumber;
 
+        [System.ComponentModel.DisplayName("Осмоторщик")]
         [System.ComponentModel.Browsable(false)]
         public int InspectorId { get; set; }
-
+        [System.ComponentModel.DisplayName("Вагон")]
         [System.ComponentModel.Browsable(false)]
         public int WagonId { get; set; }
 

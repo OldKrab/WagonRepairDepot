@@ -1,26 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace WagonRepairDepot.Models
 {
-    public interface IFormModel
-    {
-        public IFieldModel Identificator { get; }
-        public List<IFieldModel> FieldModels { get; }
-
-
-    }
-
-    class BrigadierFormModel : IFormModel
+    class WorkerFormModel : IFormModel
     {
         public List<IFieldModel> FieldModels { get; private set; }
-
         public IFieldModel Identificator { get; private set; }
-
-        public BrigadierFormModel()
+        public WorkerFormModel()
         {
             FieldModels = new List<IFieldModel>();
             FieldModels.Add(Identificator = new HiddenFieldModel("ID"));
@@ -31,4 +17,5 @@ namespace WagonRepairDepot.Models
             FieldModels.Add(new BoolFieldModel("Пол", "М", "Ж"));
         }
     }
+
 }
