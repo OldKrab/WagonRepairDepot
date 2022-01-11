@@ -24,6 +24,11 @@ namespace WagonRepairDepot.Contexts
             return db.Wagons.FromSqlRaw($"select * from client_wagon({client.ClientId});").ToList();
         }
 
+        public static List<Worker> GetWorkersInBrigade(this TrainContext db, Brigade brigade)
+        {
+            return db.Workers.FromSqlRaw($"select * from get_workers_in_brigade({brigade.BrigadeId});").ToList();
+        }
+
         public static Brigade CreateBrigade(this TrainContext db, Brigadier brigadier)
         {
             using var conn = new NpgsqlConnection(db.Database.GetConnectionString());
@@ -38,6 +43,21 @@ namespace WagonRepairDepot.Contexts
             throw new NotImplementedException();
         }
 
+
+        public static void InsertWorkerIntoBrigade(this TrainContext db,  Worker worker,Brigade brigade)
+        {
+            using var conn = new NpgsqlConnection(db.Database.GetConnectionString());
+            conn.Open();
+            using var cmd = new NpgsqlCommand($"CALL insert_worker_into_brigade({worker.WorkerId}, {brigade.BrigadeId})", conn);
+            cmd.ExecuteNonQuery();
+        }
+        public static void RemoveWorkerFromBrigade(this TrainContext db,  Worker worker,Brigade brigade)
+        {
+            using var conn = new NpgsqlConnection(db.Database.GetConnectionString());
+            conn.Open();
+            using var cmd = new NpgsqlCommand($"CALL remove_worker_from_brigade({worker.WorkerId}, {brigade.BrigadeId})", conn);
+            cmd.ExecuteNonQuery();
+        }
 
     }
 }
